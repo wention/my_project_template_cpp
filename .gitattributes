@@ -1,0 +1,13 @@
+# Batch files - Windows CRLF and GBK encoding
+*.bat text eol=crlf working-tree-encoding=GBK
+
+# Shell scripts - Unix LF and UTF-8
+*.sh text eol=lf
+
+# Inno Setup scripts
+*.iss text eol=crlf
+
+# Visual Studio files
+*.sln text eol=crlf
+*.vcxproj text eol=crlf
+

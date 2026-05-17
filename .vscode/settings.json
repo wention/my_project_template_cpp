@@ -1,0 +1,13 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools", 
+    "C_Cpp.errorSquiggles": "enabled",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.configureArgs": [
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/build/.conan/conan_toolchain.cmake"
+    ],
+    "cmake.exportCompileCommandsFile": true,
+    "cmake.preferredGenerators": [
+        "Ninja",
+    ],
+    "cmake.useCMakePresets": "never"
+}
