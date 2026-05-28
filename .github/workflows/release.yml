@@ -17,3 +17,44 @@ jobs:
         run: |
             cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="build/.conan/conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Release
             cmake --build build -j
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: myapp
+          path: build/src/app
+          retention-days: 30
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          skip-decompress: true
+      - name: Display structure of downloaded files
+        run: ls -lhR
+      - name: Compress files
+        run: ls | xargs -i zip -r {}.zip {}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: "Nightly Build"
+          draft: false
+          prerelease: true
+          files: |
+            *.zip
+          body: |
+            ## 🚀 Nightly Build
+            
+            **Build Number:** ${{ github.run_number }}
+            **Commit:** ${{ github.sha }}
+            **Triggered by:** ${{ github.triggering_actor }}
+            
+            > ⚠️ 这是自动构建的预览版本，请谨慎使用
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
