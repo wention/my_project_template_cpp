@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Conan
+        uses: conan-io/setup-conan@v1
+
+      - name: Install Conan dependencies
+        run: conan install . -of=build/.conan -s build_type=Release -s compiler.cppstd=17 --build=missing
+
+      - name: build
+        run: |
+            cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="build/.conan/conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Release
+            cmake --build build -j
