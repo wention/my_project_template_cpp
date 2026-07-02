@@ -50,11 +50,11 @@ jobs:
             *.zip
           body: |
             ## 🚀 Nightly Build
-            
+
             **Build Number:** ${{ github.run_number }}
             **Commit:** ${{ github.sha }}
             **Triggered by:** ${{ github.triggering_actor }}
-            
+
             > ⚠️ 这是自动构建的预览版本，请谨慎使用
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

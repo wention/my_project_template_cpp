@@ -1,0 +1,64 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+      - id: end-of-file-fixer
+        exclude: '\.svg$'
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+        exclude: '^\.vscode/|^cmake\.packaging/'
+      - id: check-toml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: check-case-conflict
+      - id: check-symlinks
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: detect-private-key
+
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 24.4.2
+    hooks:
+      - id: black
+        files: (^|/)conanfile\.py$
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        additional_dependencies: [tomli]
+        args: [--ignore-words-list=nd,ned,manuel,afe]
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.27.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: clang-format
+        args: [-i, --style=file]
+        types_or: [c++, c, cuda]
+      - id: clang-tidy
+        args: [-p=build]
+        types_or: [c++, c, cuda]
+        pass_filenames: true
+        # 需要先 `cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`
+        # 否则 clang-tidy 找不到系统 include
+
+  - repo: local
+    hooks:
+      - id: cmake-format
+        name: cmake-format
+        entry: cmake-format -i
+        language: python
+        additional_dependencies: [cmakelang]
+        files: '(^|/)CMakeLists\.txt$|\.cmake$|CMakeUserPresets\.json$'
+        exclude: '^build/|^cmake\.packaging/'

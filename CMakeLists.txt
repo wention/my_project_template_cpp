@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
-project(NVR VERSION 1.0.0 LANGUAGES CXX)
+project(
+  NVR
+  VERSION 1.0.0
+  LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -19,6 +22,5 @@ find_package(nlohmann_json REQUIRED)
 add_subdirectory(src)
 
 # Add packaging subdirectory (only when building from source root)
-#if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
-#  add_subdirectory(cmake.packaging)
-#endif()
+# if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
+# add_subdirectory(cmake.packaging) endif()

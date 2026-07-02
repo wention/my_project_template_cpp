@@ -1,0 +1,63 @@
+# clang-tidy 配置 - 现代 C++ 项目模板
+# 用法:clang-tidy -p build/ src/main.cpp
+# (需要 CMake 生成 compile_commands.json:cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
+
+Checks: >
+  -*,
+  bugprone-*,
+  cert-*,
+  cppcoreguidelines-pro-type-cstyle-cast,
+  cppcoreguidelines-slicing,
+  cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-narrowing-conversions,
+  -modernize-use-trailing-return-type,
+  -modernize-use-nodiscard,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -readability-function-cognitive-complexity,
+  -cert-err58-cpp,
+  -cppcoreguidelines-avoid-magic-numbers
+
+WarningsAsErrors: ''
+
+HeaderFilterRegex: '^(src|tests)/'
+
+CheckOptions:
+  - key:   readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key:   readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key:   readability-identifier-naming.StructCase
+    value: CamelCase
+  - key:   readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key:   readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+  - key:   readability-identifier-naming.FunctionCase
+    value: lower_case
+  - key:   readability-identifier-naming.ParameterCase
+    value: lower_case
+  - key:   readability-identifier-naming.VariableCase
+    value: lower_case
+  - key:   readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+  - key:   readability-identifier-naming.ProtectedMemberSuffix
+    value: '_'
+  - key:   readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key:   readability-identifier-naming.ConstantPrefix
+    value: 'k'
+  - key:   readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+  - key:   readability-braces-around-statements.ShortStatementLines
+    value: '2'
+  - key:   modernize-use-override.IgnoreDestructors
+    value: 'true'
+  - key:   performance-unnecessary-value-param.AllowedTypes
+    value: 'std::string_view;std::span'
+
+FormatStyle: file

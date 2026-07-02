@@ -1,0 +1,79 @@
+# 基于 LLVM 风格
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++17
+
+# 缩进与列宽
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+AccessModifierOffset: -4
+
+ColumnLimit: 100
+
+# 大括号风格(现有代码为同一行)
+BreakBeforeBraces: Attach
+Cpp11BracedListStyle: true
+
+# 指针/引用贴左(spdlog 风格更兼容)
+PointerAlignment: Left
+DerivePointerAlignment: false
+
+# include 排序
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"log\.h"'
+    Priority: 1
+  - Regex: '^<spdlog/.*'
+    Priority: 3
+  - Regex: '^<.*\.h>'
+    Priority: 2
+  - Regex: '^<.*>'
+    Priority: 4
+  - Regex: '.*'
+    Priority: 5
+SortIncludes: CaseSensitive
+
+# 命名(可选;不强制)
+# AttributeMacros: []
+
+# 函数/控制流
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: Inline
+AllowShortEnumsOnASingleLine: true
+
+# 参数对齐
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignOperands: Align
+AlignTrailingComments: true
+
+# 空格
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceAroundPointerQualifiers: Default
+BitFieldColonSpacing: Both
+
+# 换行
+AlwaysBreakTemplateDeclarations: Yes
+AlwaysBreakBeforeMultilineStrings: true
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerIndentWidth: 4
+BreakInheritanceList: BeforeColon
+PackConstructorInitializers: NextLine
+
+# 其他
+FixNamespaceComments: true
+ReflowComments: true
+SortUsingDeclarations: Lexicographic
+SpaceInEmptyBlock: false
+CompactNamespaces: false
+NamespaceIndentation: None
