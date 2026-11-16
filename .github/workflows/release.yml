@@ -11,18 +11,16 @@ jobs:
         uses: conan-io/setup-conan@v1
 
       - name: Install Conan dependencies
-        run: conan install . -of=build/.conan -s build_type=Release -s compiler.cppstd=17 --build=missing
+        run: conan install . -s build_type=Release -s compiler.cppstd=17 --build=missing
 
-      - name: build
-        run: |
-            cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="build/.conan/conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Release
-            cmake --build build -j
+      - name: Build
+        run: conan build . -s build_type=Release -s compiler.cppstd=17 --build=missing
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: myapp
-          path: build/src/app
+          path: build/Release/src/app
           retention-days: 30
 
   release:
