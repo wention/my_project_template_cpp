@@ -22,5 +22,6 @@ find_package(nlohmann_json REQUIRED)
 add_subdirectory(src)
 
 # Add packaging subdirectory (only when building from source root)
-# if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
-# add_subdirectory(cmake.packaging) endif()
+#if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
+#  add_subdirectory(cmake.packaging)
+#endif()

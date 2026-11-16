@@ -5,11 +5,9 @@ struct A {
     int         ABC;
 };
 
-int main(int argc, char* argv[]) {
-    LOG_INFO("abc {:.3f}", 0.3);
-    LOG_INFO("abc {:x}", 0xf00f);
-
-    int* a = NULL;
-    *a     = 1;
-    return 0;
+int main(int argc, char *argv[]) {
+  LOG_INFO("abc {:.3f}", 0.3);
+  LOG_INFO("abc {:x}", 0xf00f);
+  return 0;
 }
+
